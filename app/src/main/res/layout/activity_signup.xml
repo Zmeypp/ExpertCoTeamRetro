@@ -1,0 +1,49 @@
+<!-- activity_signup.xml -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".SignUpActivity">
+
+    <!-- Champ d'entrée pour le nom d'utilisateur -->
+    <EditText
+        android:id="@+id/editTextNewUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:hint="Nom d'utilisateur"/>
+
+    <!-- Champ d'entrée pour le mot de passe -->
+    <EditText
+        android:id="@+id/editTextNewPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextNewUsername"
+        android:layout_marginBottom="16dp"
+        android:inputType="textPassword"
+        android:hint="Mot de passe"/>
+
+    <!-- Bouton d'inscription -->
+    <Button
+        android:id="@+id/buttonSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextNewPassword"
+        android:layout_marginTop="16dp"
+        android:text="S'inscrire"/>
+
+    <Button
+        android:id="@+id/buttonLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextNewPassword"
+        android:layout_marginTop="95dp"
+        android:text="Retour connexion" />
+
+</RelativeLayout>
