@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.expertcoteamretro.database.DatabaseHelper;
 import android.widget.TextView;
 import android.view.Gravity;
+import android.widget.Toast;
 
 public class MyCharactersActivity extends AppCompatActivity {
 
@@ -38,10 +39,31 @@ public class MyCharactersActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        // Récupérer le texte du bouton
+                        String characterName = ((Button) view).getText().toString();
+
+                        String[] characterInformations = dbHelper.getCharacterInformations(userId, characterName);
+
+                        if (characterInformations != null && characterInformations.length > 0) {
+                            String nameOfYourCharacter = characterInformations[1];
+                            String characterId = characterInformations[0];
+                            Intent intent = new Intent(MyCharactersActivity.this, CharacterActivity.class);
+                            intent.putExtra("userId", userId);
+                            intent.putExtra("character_name", nameOfYourCharacter);
+                            intent.putExtra("character_id", characterId);
+                            startActivity(intent);
+                            // Afficher le nom du personnage dans une TextView ou effectuer d'autres opérations nécessaires
+                        } else {
+                            // Gérer le cas où les informations du personnage ne sont pas trouvées
+                            Toast.makeText(MyCharactersActivity.this, "Informations du personnage non trouvées", Toast.LENGTH_SHORT).show();
+                        }
+
                         // Logique à exécuter lorsqu'un bouton est cliqué
                         // Vous pouvez par exemple démarrer une nouvelle activité avec les détails du personnage
+                        // Vous pouvez également utiliser le nom du personnage (characterName) pour effectuer d'autres opérations
                     }
                 });
+
 
                 // Ajouter le bouton au layout parent (linearLayout)
                 linearLayout.addView(button);

@@ -264,6 +264,47 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
+// FONCTION POUR RECUPERER LES INFORMATIONS DU PERSONNAGE CLIQUE
+    public String[] getCharacterInformations(long userId, String characterName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<String> characterInformations = new ArrayList<>();
+
+        // Requête SQL avec une jointure
+        String query = "SELECT " + DatabaseContract.CharacterEntry.CHARACTER_ID + ", " + DatabaseContract.CharacterEntry.NAME +
+                " FROM " + DatabaseContract.CharacterEntry.TABLE_NAME +
+                " INNER JOIN " + DatabaseContract.UserEntry.TABLE_NAME +
+                " ON " + DatabaseContract.CharacterEntry.TABLE_NAME + "." + DatabaseContract.CharacterEntry.USER_ID +
+                " = " + DatabaseContract.UserEntry.TABLE_NAME + "." + DatabaseContract.UserEntry._ID +
+                " WHERE " + DatabaseContract.UserEntry.TABLE_NAME + "." + DatabaseContract.UserEntry._ID +
+                " = " + userId +
+                " AND " + DatabaseContract.CharacterEntry.NAME +
+                " = '" + characterName + "'";
+
+        Cursor cursor = db.rawQuery(query, null);
+
+        // Parcourir le curseur et ajouter les informations du personnage à la liste
+        if (cursor.moveToFirst()) {
+            do {
+                String characterId = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.CharacterEntry.CHARACTER_ID));
+                String characterNameResult = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.CharacterEntry.NAME));
+
+                // Ajouter les informations du personnage à la liste
+                characterInformations.add(characterId);
+                characterInformations.add(characterNameResult);
+            } while (cursor.moveToNext());
+        }
+
+        // Fermer le curseur et la base de données
+        cursor.close();
+        db.close();
+
+        // Convertir la liste en tableau de chaînes et le retourner
+        return characterInformations.toArray(new String[0]);
+    }
+
+
+
+
 
 
 
