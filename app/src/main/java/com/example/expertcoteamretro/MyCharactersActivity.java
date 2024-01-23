@@ -43,7 +43,7 @@ public class MyCharactersActivity extends AppCompatActivity {
                     }
                 });
 
-                // Ajouter le bouton au layout parent
+                // Ajouter le bouton au layout parent (linearLayout)
                 linearLayout.addView(button);
             }
         } else {

@@ -5,17 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Ajout des boutons aux noms des personnages de l'utilisateur -->
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <!-- Ajout d'une vue flexible pour pousser le bouton en haut -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_above="@+id/buttonCreateCharacter"
+        android:layout_weight="1" />
+
+    <!-- Ajout des boutons aux noms des personnages de l'utilisateur avec ScrollView -->
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:layout_above="@+id/buttonCreateCharacter">
 
-        <!-- Ajouter les boutons ici comme avant -->
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-    </LinearLayout>
+            <!-- Ajouter les boutons ici comme avant -->
+
+        </LinearLayout>
+    </ScrollView>
 
     <!-- Ajout du bouton "Créer un personnage" en bas -->
     <Button
@@ -25,12 +38,5 @@
         android:text="Créer un personnage"
         android:onClick="onCreateCharacterButtonClick"
         android:layout_alignParentBottom="true" />
-
-    <!-- Ajout d'une vue flexible pour pousser le bouton en haut -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_above="@id/buttonCreateCharacter"
-        android:layout_weight="1" />
 
 </RelativeLayout>
